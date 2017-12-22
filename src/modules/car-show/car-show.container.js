@@ -1,12 +1,14 @@
 import React from 'react';
-import {If} from "../common/utilities";
+import { If } from "../common/utilities";
 
 // Stateful Component
 class CarShow extends React.Component {
 
-    render() {
-        
-      return (
+  render() {
+
+    return (
+      <div>
+        <h1>Welcome to the Car Show</h1>
         <If condition={true}>
           <div>
             <p>
@@ -14,7 +16,8 @@ class CarShow extends React.Component {
             </p>
           </div>
         </If>
-      );
-    }
-} 
+      </div>
+    );
+  }
+}
 export default CarShow;
