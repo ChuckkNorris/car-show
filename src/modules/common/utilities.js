@@ -5,7 +5,7 @@
 // @props.children is a reserved React property representing any children within the If component
 export const If = ({condition, children}) => {
     if (condition)
-        return children;
+      return children;
     else 
-        return null;
+      return null;
 }
