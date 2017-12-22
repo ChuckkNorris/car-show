@@ -8,7 +8,7 @@ class CarShow extends React.Component {
 
     return (
       <div>
-        <h1>Welcome to the Car Show</h1>
+        <h1>Welcome to the Car Show, Credera!</h1>
         <If condition={true}>
           <div>
             <p>
