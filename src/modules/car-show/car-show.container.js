@@ -1,5 +1,7 @@
 import React from 'react';
 import { If } from "../common/utilities";
+import {Header} from 'semantic-ui-react';
+import CarList from './car-list/car-list.component';
 
 // Stateful Component
 class CarShow extends React.Component {
@@ -8,13 +10,9 @@ class CarShow extends React.Component {
 
     return (
       <div>
-        <h1>Welcome to the Car Show, Credera!</h1>
+        <Header style={{textAlign: 'center'}}>Welcome to the Ride Show, Credera!</Header>
         <If condition={true}>
-          <div>
-            <p>
-              Hello There!
-            </p>
-          </div>
+          <CarList />
         </If>
       </div>
     );
