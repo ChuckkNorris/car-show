@@ -1,5 +1,23 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers, compose } from 'redux';
+import carShowReducer from './modules/car-show/car-show.reducer';
+import DevTools from './modules/common/dev-tools.component';
 
+const initialState = {
+  // cars: [],
+  // carEditorModal: {isOpen: false}
+};
+
+const rootReducer = combineReducers({
+  carShow: carShowReducer
+});
+console.log(DevTools.instrument);
+let store = createStore(
+  rootReducer,
+  initialState,
+  DevTools.instrument()
+);
+
+export default store;
 /**
  * This is a reducer, a pure function with (state, action) => state signature.
  * It describes how an action transforms the state into the next state.
@@ -12,35 +30,35 @@ import { createStore } from 'redux'
  * follows a different convention (such as function maps) if it makes sense for your
  * project.
  */
-function counter(state = 0, action) {
-  switch (action.type) {
-  case 'INCREMENT':
-    return state + 1
-  case 'DECREMENT':
-    return state - 1
-  default:
-    return state
-  }
-}
+// function counter(state = 0, action) {
+//   switch (action.type) {
+//   case 'INCREMENT':
+//     return state + 1
+//   case 'DECREMENT':
+//     return state - 1
+//   default:
+//     return state
+//   }
+// }
 
 
-// Create a Redux store holding the state of your app.
-// Its API is { subscribe, dispatch, getState }.
-let store = createStore(counter)
+// // Create a Redux store holding the state of your app.
+// // Its API is { subscribe, dispatch, getState }.
+// let store = createStore(counter)
 
-// You can use subscribe() to update the UI in response to state changes.
-// Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
-// However it can also be handy to persist the current state in the localStorage.
+// // You can use subscribe() to update the UI in response to state changes.
+// // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
+// // However it can also be handy to persist the current state in the localStorage.
 
-store.subscribe(() =>
-  console.log(store.getState())
-)
+// store.subscribe(() =>
+//   console.log(store.getState())
+// )
 
-// The only way to mutate the internal state is to dispatch an action.
-// The actions can be serialized, logged or stored and later replayed.
-store.dispatch({ type: 'INCREMENT' })
-// 1
-store.dispatch({ type: 'INCREMENT' })
-// 2
-store.dispatch({ type: 'DECREMENT' })
+// // The only way to mutate the internal state is to dispatch an action.
+// // The actions can be serialized, logged or stored and later replayed.
+// store.dispatch({ type: 'INCREMENT' })
+// // 1
+// store.dispatch({ type: 'INCREMENT' })
+// // 2
+// store.dispatch({ type: 'DECREMENT' })
 // 1
