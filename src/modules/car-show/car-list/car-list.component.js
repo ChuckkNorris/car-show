@@ -19,7 +19,7 @@ const CarList = ({cars, onCarSelected}) => {
     <Grid bsClass='container'>
       <Row>
         {cars ? cars.map(car =>
-          <Col onClick={() => onCarSelected(car.id)} key={car.id} style={styles.carColumn} xs={12} sm={4} md={3} lg={2}>
+          <Col onClick={() => onCarSelected(car)} key={car.id} style={styles.carColumn} xs={12} sm={4} md={3} lg={2}>
             <CarCard car={car} />
           </Col>
         ): null}

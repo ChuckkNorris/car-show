@@ -9,3 +9,12 @@ export const If = ({condition, children}) => {
     else 
       return null;
 }
+
+// Helper function to enables passing an object with
+// the action.type as the key and the reducer as the function
+export const createReducer = (initialState = {}, actionHandlerKeyFuncs = {}) => {
+  return (state = initialState, action) => {
+    const actionHandler = actionHandlerKeyFuncs[action.type];
+    return actionHandler ? actionHandler(state, action) : initialState;
+  }
+};
