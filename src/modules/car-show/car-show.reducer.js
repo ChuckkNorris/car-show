@@ -4,19 +4,38 @@ import * as carShowData from './car-show.data';
 import { createReducer } from '../common/utilities';
 import carEditorModalReducer from './car-editor/car-editor.reducer';
 
+const carDetailsReducer = createReducer(
+  { isLoading: false, response: null, request: null }, 
+  {
+    [keys.GET_MODEL_TRIMS_START]: (state, action) => {
+      console.log('STATE START:', state);
+      return {
+        ...state,
+        isLoading: true,
+        request: {
+          ...action
+        } 
+      }
+    },
+    [keys.GET_MODEL_TRIMS_SUCCESS]: (state, action) => {
+      console.log('STATE END:', state);
+      return {
+        ...state,
+        isLoading: false,
+        response: action.response
+      }
+    }
+})
+
 const carsReducer = createReducer(
   [...carShowData.cars],
   {
-    // [keys.TOGGLE_CAR_EDITOR_MODAL]: (state, action) => {
-    //   return {
-    //     ...state,
-    //     isOpen: !state.isOpen
-    //   };
-    // }
+   
   }
 );
 
 export default combineReducers({
   carEditorModal: carEditorModalReducer,
-  cars: carsReducer
+  cars: carsReducer,
+  carDetails: carDetailsReducer
 });

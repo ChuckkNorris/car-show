@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import {Modal, Button, Icon, Header, Input} from 'semantic-ui-react';
 import * as carEditorActions from './car-editor.actions';
 import _ from 'lodash';
+import * as carShowActions from '../car-show.actions';
 
 const CarEditorModal = ({carEditorModal, toggleCarEditorModal}) => {
-  // carEditorModal.isOpen
-  // trigger={<Button>Show Modal</Button>}
   const car = carEditorModal.selectedCar;
   if (!car) { 
     return null;
@@ -37,5 +36,5 @@ export default connect(
     carEditorModal: state.carShow.carEditorModal
   }),
   // Mapping actions to props
-  {...carEditorActions}
+  {...carEditorActions, ...carShowActions}
 )(CarEditorModal);
