@@ -3,7 +3,7 @@ import {keys} from './car-editor.actions';
 import { createReducer } from '../../common/utilities';
 
 const carEditorModalReducer = createReducer(
-  { isOpen: true }, // initialState
+  { isOpen: false }, // initialState
   { // [key]: actionFunc()
     [keys.TOGGLE_CAR_EDITOR_MODAL]: (state, action) => {
       const toSet = !state.isOpen;

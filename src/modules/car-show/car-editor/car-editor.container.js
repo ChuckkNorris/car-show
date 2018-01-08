@@ -31,23 +31,23 @@ class CarEditorModal extends React.Component {
     //   return null;
     // }
     return (
-      carEditorModal.isOpen ? <h1>TOTALLY OPEN</h1> : <h1>IT'S CLOSED ASFKMLASF</h1>
+      // carEditorModal.isOpen ? <h1>TOTALLY OPEN</h1> : <h1>IT'S CLOSED ASFKMLASF</h1>
       // <If condition={carEditorModal.isOpen}></If>
       // `${car.year} ${car.make} ${car.model}`
-      // <Modal open={carEditorModal.isOpen} basic size='small'>
-      //   <Header icon='archive' content={''} />
-      //   <Modal.Content>
-      //     <p>ssdsd</p>
-      //   </Modal.Content>
-      //   <Modal.Actions>
-      //     <Button onClick={toggleCarEditorModal} basic color='red' inverted>
-      //       <Icon name='remove' /> No
-      //     </Button>
-      //     <Button color='green' inverted>
-      //       <Icon name='checkmark' /> Yes
-      //     </Button>
-      //   </Modal.Actions>
-      // </Modal>
+      <Modal open={carEditorModal.isOpen} basic size='small'>
+        <Header icon='archive' content={''} />
+        <Modal.Content>
+          <p>ssdsd</p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={toggleCarEditorModal} basic color='red' inverted>
+            <Icon name='remove' /> No
+          </Button>
+          <Button color='green' inverted>
+            <Icon name='checkmark' /> Yes
+          </Button>
+        </Modal.Actions>
+      </Modal>
     );
   }
 }

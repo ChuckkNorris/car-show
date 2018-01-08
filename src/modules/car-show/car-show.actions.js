@@ -27,8 +27,7 @@ export const getModelTrims = (year, make, model) => {
   return (dispatch, getState) => {
     dispatch(getModelTrimsStart(year, make, model));
     // return dispatch((dispatch) => {
-      
-      return carShowService.getTrims(year, make, model).then(response => dispatch(getModelTrimsSuccess(response)));
+    return carShowService.getTrims(year, make, model).then(response => dispatch(getModelTrimsSuccess(response)));
     // })
   }
 }
