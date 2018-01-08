@@ -3,17 +3,17 @@ import _ from 'lodash';
 const BASE_URL = 'https://www.carqueryapi.com/api/0.3';
 
 const carService = {
-  getYears: async () => {
+  getYears: () => {
     const response = executeCarQuery('getYears');
     return response.years;
   },
-  getMakes: async (year) => {
+  getMakes: (year) => {
     const response = executeCarQuery('getMakes', {
       year
     });
     return response.years;
   },
-  getModels: async (year, make) => {
+  getModels: (year, make) => {
     const response = executeCarQuery('getModels', {
       year,
       make: make.toLowerCase()
@@ -28,7 +28,7 @@ const carService = {
     });
     return response;
   },
-  getModel: async (modelId) => {
+  getModel: (modelId) => {
     const response = executeCarQuery('getModel', {
       modelId 
     });
@@ -36,13 +36,20 @@ const carService = {
   }
 };
 
-const executeCarQuery = async (endpointName, params) => {
+const executeCarQuery = (endpointName, params) => {
   let url = new URL(`http://localhost:5000/api/cars/${endpointName}`);
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-  const response = await fetch(url);
-  const toReturn = await response.json();
-  console.log(toReturn);
-  return toReturn;
+  return new Promise((resolve, reject) => {
+    fetch(url).then(response => {
+      response.json().then(json => {
+        if (json.error) reject(json);
+        else resolve(json);
+      })
+    })
+  });
+  // const response = await fetch(url);
+  // const toReturn = await response.json();
+  // return toReturn;
 }
 
 export default carService;

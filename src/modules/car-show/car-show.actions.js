@@ -10,6 +10,7 @@ const getModelTrimsStart = (year, make, model) => {
   return {
     type: keys.GET_MODEL_TRIMS_START,
     year,
+    make,
     model
   };
 }
@@ -24,9 +25,10 @@ const getModelTrimsSuccess = (response) => {
 export const getModelTrims = (year, make, model) => {
   // Thunk Middleware enables action creators to return functions instead of an action object
   return (dispatch, getState) => {
-    return dispatch((dispatch) => {
-      dispatch(getModelTrimsStart(year, make, model));
+    dispatch(getModelTrimsStart(year, make, model));
+    // return dispatch((dispatch) => {
+      
       return carShowService.getTrims(year, make, model).then(response => dispatch(getModelTrimsSuccess(response)));
-    })
+    // })
   }
 }

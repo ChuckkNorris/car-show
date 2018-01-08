@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import carShowStore from './store';
-
 import DevTools from './modules/common/dev-tools.component';
+
+import configureStore from './store';
+
+const store = configureStore();
 
 ReactDOM.render(
   (
-    <Provider store={carShowStore}>
+    <Provider store={store}>
       <div>
         <App />
         <DevTools />

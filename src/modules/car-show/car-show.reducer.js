@@ -8,17 +8,13 @@ const carDetailsReducer = createReducer(
   { isLoading: false, response: null, request: null }, 
   {
     [keys.GET_MODEL_TRIMS_START]: (state, action) => {
-      console.log('STATE START:', state);
       return {
         ...state,
         isLoading: true,
-        request: {
-          ...action
-        } 
+        request: action
       }
     },
     [keys.GET_MODEL_TRIMS_SUCCESS]: (state, action) => {
-      console.log('STATE END:', state);
       return {
         ...state,
         isLoading: false,
