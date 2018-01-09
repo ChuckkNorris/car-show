@@ -16,7 +16,7 @@ const DevTools = createDevTools(
      * Change the position of the dock with "ctrl-q".
      */
     changePositionKey='alt-q'
-    defaultIsVisible={true}
+    defaultIsVisible={false}
   >
     <LogMonitor theme='tomorrow' />
   </DockMonitor>

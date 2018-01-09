@@ -23,11 +23,10 @@ const getModelTrimsSuccess = (response) => {
 }
 
 export const getModelTrims = (year, make, model) => {
-  // Thunk Middleware enables action creators to return functions instead of an action object
+  // Thunk Middleware enables action creators to return functions in place of action objects
+  // Which allows you to dispatch multiple actions in one action creator (via dispatch parameter)
   return (dispatch, getState) => {
     dispatch(getModelTrimsStart(year, make, model));
-    // return dispatch((dispatch) => {
     return carShowService.getTrims(year, make, model).then(response => dispatch(getModelTrimsSuccess(response)));
-    // })
   }
 }

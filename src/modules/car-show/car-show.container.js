@@ -17,30 +17,13 @@ const styles = {
   }
 };
 
-const CarDetails = ({carDetailsResponse}) => {
-  if (!carDetailsResponse || !carDetailsResponse.Trims || !carDetailsResponse.Trims.length > 0)
-    return null;
-  const trims = carDetailsResponse.Trims;
-  const trim = trims[trims.length - 1];
-  // DETAILS IS  UNDEFEINE!!!!
-  const details = Object.keys(trim).forEach(specName => {
-    const specValue = trim[specName];
-    return (
-      <p>{specName}: {specValue}</p>
-    )
-  });
-  return (
-    <div>
-      {details}
-    </div>
-  )
-};
-
 // Stateful Component
 class CarShow extends React.Component {
 
   constructor(props) {
     super(props);
+    // Bind our function's scope to the CarShow component
+    // which enables access to this.props, this.setState(), etc.
     this.onCarSelected = this.onCarSelected.bind(this);
   }
 
@@ -49,18 +32,17 @@ class CarShow extends React.Component {
   }
 
   onCarSelected(car) {
-    const {toggleCarEditorModal, getModelTrims, fetchPostsIfNeeded, dispatch} = this.props;
+    const {toggleCarEditorModal} = this.props;
     toggleCarEditorModal(car);
-    getModelTrims(car.year, car.make, car.model);
+    // getModelTrims(car.year, car.make, car.model);
   }
 
   render() {
     const {cars, carEditorModal, carDetails = {}} = this.props;
-    console.log('editorModal', carEditorModal)
+    console.log('editorModal', carDetails)
     return (
       <div>
         <CarEditor />
-        {carDetails.response ? <CarDetails carDetailsResponse={carDetails.response} /> : null}
         <Header style={{textAlign: 'center'}}>Welcome to the Ride Show, Credera!</Header>
         <If condition={true}>
           <CarList cars={this.props.cars} onCarSelected={this.onCarSelected} />
@@ -73,9 +55,11 @@ class CarShow extends React.Component {
 
 }
 // Redux Middleware
+// Connects our component to the redux store
 export default connect(
   // Map the required data objects from the global
   // state to your component via its 'props'
+  // NOTE: Anytime these values change, this component will re-render
   (state) => ({
     cars: state.carShow.cars,
     carEditorModal: state.carShow.carEditorModal,

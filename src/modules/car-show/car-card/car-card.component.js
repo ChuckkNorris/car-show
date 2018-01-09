@@ -14,9 +14,18 @@ const styles = {
 
 // Stateless Component
 const CarCard = ({car}) => {
+
+  const imageStyle = {
+    background: `url(${car.imageUrl}) no-repeat left center`,
+    backgroundSize: '100%',
+    height: 300 // px is default
+  }
+  
   return (
     <Card style={styles.carCard}>
-      <Image src={car.imageUrl} />
+      <div style={imageStyle}></div>
+      {/* <img style={background}
+      <Image src={car.imageUrl} /> */}
       <Card.Content>
         <Card.Header>
           {car.make} {car.model}

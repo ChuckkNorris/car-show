@@ -11,20 +11,27 @@ const styles = {
   },
   carCard: {
     width: '100%'
+  },
+  grid: {
+    marginLeft: 20
   }
 };
 
 // Stateless Component
 const CarList = ({cars, onCarSelected}) => {
   return (
-    <Grid>
-      <Grid.Row columns={6}>
+    <Grid style={styles.grid}>
+      {/* <Grid.Row columns={5}> */}
         {cars ? cars.map(car =>
-          <Grid.Column key={car.id} style={styles.carColumn} onClick={() => onCarSelected(car)}>
+          <Grid.Column
+            mobile={8} tablet={4} computer={3}
+            key={car.id}
+            style={styles.carColumn}
+            onClick={() => onCarSelected(car)}>
             <CarCard car={car} />
           </Grid.Column>
         ): null}
-      </Grid.Row>
+      {/* </Grid.Row> */}
     </Grid>
     // <Grid bsClass='container'>
     //   <Row>
