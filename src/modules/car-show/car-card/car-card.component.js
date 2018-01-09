@@ -19,7 +19,7 @@ const CarCard = ({car}) => {
     background: `url(${car.imageUrl}) no-repeat left center`,
     backgroundSize: '100%',
     height: 300 // px is default
-  }
+  };
   
   return (
     <Card style={styles.carCard}>

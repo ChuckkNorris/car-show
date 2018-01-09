@@ -14,6 +14,9 @@ import carService from './car-show.service';
 const styles = {
   header: {
     textAlign: 'center',
+  },
+  container: {
+    paddingTop: 30
   }
 };
 
@@ -41,9 +44,9 @@ class CarShow extends React.Component {
     const {cars, carEditorModal, carDetails = {}} = this.props;
     console.log('editorModal', carDetails)
     return (
-      <div>
+      <div style={styles.container}>
         <CarEditor />
-        <Header style={{textAlign: 'center'}}>Welcome to the Ride Show, Credera!</Header>
+        <Header size='large' style={{textAlign: 'center'}}>Welcome to the Ride Show, Credera!</Header>
         <If condition={true}>
           <CarList cars={this.props.cars} onCarSelected={this.onCarSelected} />
         </If>
