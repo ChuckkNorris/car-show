@@ -5,10 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import DevTools from './modules/common/dev-tools.component';
-
-import configureStore from './store';
-
-const store = configureStore();
+import store from './store';
 
 ReactDOM.render(
   (

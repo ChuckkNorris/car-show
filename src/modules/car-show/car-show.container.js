@@ -8,7 +8,6 @@ import CarList from './car-list/car-list.component';
 import CarEditor from './car-editor/car-editor.container';
 import * as carEditorActions from './car-editor/car-editor.actions';
 import * as carShowActions from './car-show.actions';
-
 import carService from './car-show.service';
 
 const styles = {
@@ -21,6 +20,7 @@ const styles = {
 };
 
 // Stateful Component
+// e.g. can call this.setState() and has Lifecycle Hooks
 class CarShow extends React.Component {
 
   constructor(props) {
@@ -42,7 +42,6 @@ class CarShow extends React.Component {
 
   render() {
     const {cars, carEditorModal, carDetails = {}} = this.props;
-    console.log('editorModal', carDetails)
     return (
       <div style={styles.container}>
         <CarEditor />
@@ -50,8 +49,6 @@ class CarShow extends React.Component {
         <If condition={true}>
           <CarList cars={this.props.cars} onCarSelected={this.onCarSelected} />
         </If>
-        
-       
       </div>
     );
   }

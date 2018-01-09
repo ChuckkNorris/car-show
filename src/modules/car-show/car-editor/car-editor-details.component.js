@@ -8,7 +8,7 @@ const getSpecsAsTable = (carDetailsResponse) => {
   const details = Object.keys(trim).map(specName => {
     const specValue = trim[specName];
     return (
-      <Table.Row>
+      <Table.Row key={specName}>
         <Table.Cell>{specName}</Table.Cell>
         <Table.Cell>{specValue}</Table.Cell>
       </Table.Row>
@@ -31,10 +31,10 @@ const CarEditorDetails = ({carDetails}) => {
   const response = carDetails.response;
 
   if (!response || !response.Trims || response.Trims.length < 1)
-return (<p>No Car Data Found :</p>);
+    return (<p>No Car Data Found :</p>);
  
   return (
-    <Table celled>
+    <Table>
       <Table.Header>
         <Table.HeaderCell colSpan='2'>Vehicle Specifications</Table.HeaderCell>
       </Table.Header>

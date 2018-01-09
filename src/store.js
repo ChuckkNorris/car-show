@@ -10,19 +10,19 @@ const rootReducer = combineReducers({
 
 const loggerMiddleware = createLogger();
 
-const configureStore = (preloadedState) => {
-  return createStore(
-    rootReducer,
-    preloadedState,
-    compose(
-      applyMiddleware(
-        thunkMiddlware,
-        loggerMiddleware
-      ),
-      DevTools.instrument()
-    )
-  );
-}
+// const configureStore = (preloadedState) => {
+//   return createStore(
+//     rootReducer,
+//     preloadedState,
+//     compose(
+//       applyMiddleware(
+//         thunkMiddlware,
+//         loggerMiddleware
+//       ),
+//       DevTools.instrument()
+//     )
+//   );
+// }
 const store = createStore(
   rootReducer,
   undefined,
@@ -35,4 +35,4 @@ const store = createStore(
   )
 );
 
-export default configureStore;
+export default store;

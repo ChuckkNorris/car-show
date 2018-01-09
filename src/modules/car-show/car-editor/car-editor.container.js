@@ -5,6 +5,8 @@ import {Modal, Button, Icon, Header, Input, Table} from 'semantic-ui-react';
 import * as carEditorActions from './car-editor.actions';
 import * as carShowActions from '../car-show.actions';
 import CarEditorDetails from './car-editor-details.component';
+import CarSelector from './car-selector.component';
+import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid/Grid';
 
 const styles = {
   headerText: {
@@ -30,7 +32,10 @@ const styles = {
 }
 
 const getSelectedCar = (props) => {
-  return _.get(props, 'carEditorModal.selectedCar');
+  if (!_.get(props, 'carEditorModal.selectedCar.id'))
+    return undefined;
+  return _.find(props.cars, (car) => car.id == props.carEditorModal.selectedCar.id);
+  // return _.get(props, 'carEditorModal.selectedCar');
 }
 
 class CarEditorModal extends React.Component {
@@ -38,17 +43,15 @@ class CarEditorModal extends React.Component {
   componentWillReceiveProps(nextProps) {
     const prevCar = getSelectedCar(this.props);
     const nextCar = getSelectedCar(nextProps);
-    if (nextCar && nextCar !== prevCar) {
-      // const {carEditorModal, getModelTrims} = nextProps;
-      // const car = carEditorModal.selectedCar;
+    const shouldGetModelTrims = !prevCar || (nextCar && nextCar !== prevCar);
+    if (shouldGetModelTrims) {
       nextProps.getModelTrims(nextCar.year, nextCar.make, nextCar.model);
     }
   }
 
   render() {
-    const {carEditorModal, toggleCarEditorModal, carDetails} = this.props;
-    const car = carEditorModal.selectedCar;
-
+    const {carEditorModal, toggleCarEditorModal, carDetails, updateCar, cars} = this.props;
+    const car = getSelectedCar(this.props); // carEditorModal.selectedCar;
     if (!car)
       return null;
     
@@ -61,17 +64,25 @@ class CarEditorModal extends React.Component {
           <Header style={styles.headerText} icon='car' content={`${car.year} ${car.make} ${car.model}`} />
         </div>
         <Modal.Content>
-          <CarEditorDetails carDetails={carDetails} />
+          <Grid>
+            <Grid.Row>
+              <CarSelector car={car} updateCar={updateCar} />
+            </Grid.Row>
+            <Grid.Row>
+              <CarEditorDetails carDetails={carDetails} />
+            </Grid.Row>
+          </Grid>
+          
         </Modal.Content>
       </Modal>
     );
   }
 }
 
-// export default CarEditorModal;
 export default connect(
   // Mapping state to props
   (state) => ({
+    cars:state.carShow.cars,
     carEditorModal: state.carShow.carEditorModal,
     carDetails: state.carShow.carDetails
   }),

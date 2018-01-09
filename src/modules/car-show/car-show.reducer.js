@@ -26,7 +26,26 @@ const carDetailsReducer = createReducer(
 const carsReducer = createReducer(
   [...carShowData.cars],
   {
-   
+    [keys.ADD_CAR] : (state, action) => {
+      return [
+        // e.g. array of cars
+        ...state,
+        // add an empty car
+        { id: action.carId }
+      ];
+    },
+    [keys.REMOVE_CAR] : (state, action) => {
+      return state.map(car => {
+        if (car.id != action.carId)
+          return car;
+      });
+    },
+    [keys.UPDATE_CAR] : (state, action) => {
+      const updatedCar = action.car;
+      return state.map(car => {
+        return car.id == updatedCar.id ? {...car, ...updatedCar} : car;
+      });
+    },
   }
 );
 
