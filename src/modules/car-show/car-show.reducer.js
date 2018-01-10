@@ -27,6 +27,7 @@ const carsReducer = createReducer(
   [...carShowData.cars],
   {
     [keys.ADD_CAR] : (state, action) => {
+      // TODO: Trigger modal
       return [
         // e.g. array of cars
         ...state,
