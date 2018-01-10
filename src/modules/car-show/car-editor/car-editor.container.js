@@ -7,6 +7,7 @@ import * as carShowActions from '../car-show.actions';
 import CarEditorDetails from './car-editor-details.component';
 import CarSelector from './car-selector.component';
 import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid/Grid';
+import * as editorHelpers from './car-editor.helpers';
 
 const styles = {
   headerText: {
@@ -32,21 +33,51 @@ const styles = {
 }
 
 const getSelectedCar = (props) => {
-  if (!_.get(props, 'carEditorModal.selectedCar.id'))
+  const selectedCarId = _.get(props, 'carEditorModal.selectedCarId');
+  if (!selectedCarId)
     return undefined;
-  return _.find(props.cars, (car) => car.id == props.carEditorModal.selectedCar.id);
-  // return _.get(props, 'carEditorModal.selectedCar');
+  return _.find(props.cars, (car) => car.id == selectedCarId);
+}
+
+const shoudGetModelTrims = (prevCar, nextCar) => {
+  // !prevCar ||
+  if (prevCar === undefined && nextCar && nextCar.year && nextCar.make && nextCar.model)
+    return true;
+  if (!nextCar)
+    return false;
+  return (prevCar && nextCar
+    && nextCar.year && nextCar.make && nextCar.model
+    && prevCar.year !== nextCar.year
+    && prevCar.make !== nextCar.make
+    && prevCar.model !== nextCar.model);
+}
+
+const handleCarChange = (prevProps, nextProps) => {
+  const prevCar = getSelectedCar(prevProps);
+  const nextCar = getSelectedCar(nextProps);
+  // Make car details request if there is no car or a new one coming in
+  const shouldGetModelTrims = !prevCar || (nextCar && nextCar !== prevCar);
+  if (shoudGetModelTrims(prevCar, nextCar)) {
+    nextProps.getModelTrims(nextCar.year, nextCar.make, nextCar.model);
+  }
+}
+
+const handleSpecsChange = (prevProps, nextProps) => {
+  const prevCarSpecs = editorHelpers.getLastModelTrimSpecs(prevProps.carDetails.response);
+  const nextCarSpecs = editorHelpers.getLastModelTrimSpecs(nextProps.carDetails.response);
+  const horsepowerSpec = _.find(nextCarSpecs, (spec) => spec.name === 'model_engine_power_ps');
+  if (prevCarSpecs !== nextCarSpecs && horsepowerSpec) {
+    const selectedCar = getSelectedCar(nextProps);
+    // nextProps.updateCar({...selectedCar, horsepower: horsepowerSpec.value});
+  }
 }
 
 class CarEditorModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
-    const prevCar = getSelectedCar(this.props);
-    const nextCar = getSelectedCar(nextProps);
-    const shouldGetModelTrims = !prevCar || (nextCar && nextCar !== prevCar);
-    if (shouldGetModelTrims) {
-      nextProps.getModelTrims(nextCar.year, nextCar.make, nextCar.model);
-    }
+    handleCarChange(this.props, nextProps);
+    // Removed to avoid revoked API access
+    // handleSpecsChange(this.props, nextProps);
   }
 
   render() {

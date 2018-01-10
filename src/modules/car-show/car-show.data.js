@@ -8,7 +8,7 @@ export const cars = [
   { id: 4, year: 1991, make: 'Suzuki', model: 'Hayabusa', description: 'The winningest BMW ever made', horsepower: 190, imageUrl: 'https://i.imgur.com/PrqcRff.jpg'},
   { id: 5, year: 2004, make: 'BMW', model: 'M3', description: 'The best looking M3 ever made', horsepower: 333, imageUrl: 'https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/556504_10201320706512485_1742207775_n.jpg?oh=5d139f8a08ad8b61433e052ce259d0d3&oe=5AF62D62'},
   { id: 6, year: 2015, make: 'Yamaha', model: 'FZ-09', description: 'Neat Bike!', horsepower: 110, imageUrl: 'https://i.imgur.com/ULeJbZ8.jpg'},
-  { id: 7, year: 2016, make: 'Chevrolet', model: 'Camaro', description: 'Neat Car!', horsepower: 190, imageUrl: 'https://i.imgur.com/NzRrvXW.png'},
+  { id: 7, year: 2016, make: 'Chevrolet', model: 'Camaro', description: 'Neat Car!', horsepower: 455, imageUrl: 'https://i.imgur.com/NzRrvXW.png'},
   { id: 8, year: 2017, make: 'Volkswagen', model: 'Golf', description: 'Neat Car!', horsepower: 190, imageUrl: 'https://i.imgur.com/q0klba1.png'},
   { id: 9, year: 2014, make: 'Ford', model: 'Mustang', description: 'The winningest BMW ever made', horsepower: 190, imageUrl: 'https://i.imgur.com/h3MgsQr.jpg'},
   { id: 10, year: 2003, make: 'Nissan', model: 'Altima', description: 'The winningest BMW ever made', horsepower: 190, imageUrl: 'https://i.imgur.com/nveAO0Z.png'},

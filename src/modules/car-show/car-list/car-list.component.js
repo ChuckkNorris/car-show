@@ -21,7 +21,6 @@ const styles = {
 const CarList = ({cars, onCarSelected}) => {
   return (
     <Grid style={styles.grid}>
-      {/* <Grid.Row columns={5}> */}
         {cars ? cars.map(car =>
           <Grid.Column
             mobile={8} tablet={4} computer={3}
@@ -31,17 +30,7 @@ const CarList = ({cars, onCarSelected}) => {
             <CarCard car={car} />
           </Grid.Column>
         ): null}
-      {/* </Grid.Row> */}
     </Grid>
-    // <Grid bsClass='container'>
-    //   <Row>
-    //     {cars ? cars.map(car =>
-    //       <Col onClick={() => onCarSelected(car)} key={car.id} style={styles.carColumn} xs={12} sm={4} md={3} lg={2}>
-    //         <CarCard car={car} />
-    //       </Col>
-    //     ): null}
-    //   </Row>
-    // </Grid>
   );
 }
 

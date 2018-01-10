@@ -1,20 +1,19 @@
 import React from 'react';
 import _ from 'lodash';
 import {Table, Segment, Dimmer, Loader} from 'semantic-ui-react';
+import * as editorHelpers from './car-editor.helpers';
 
-const getSpecsAsTable = (carDetailsResponse) => {
-  const trims = carDetailsResponse.Trims;
-  const trim = trims[trims.length - 1];
-  const details = Object.keys(trim).map(specName => {
-    const specValue = trim[specName];
+const getSpecsAsRows = (carDetailsResponse) => {
+  const trimSpecs = editorHelpers.getLastModelTrimSpecs(carDetailsResponse);
+  const specRows = trimSpecs.map(spec => {
     return (
-      <Table.Row key={specName}>
-        <Table.Cell>{specName}</Table.Cell>
-        <Table.Cell>{specValue}</Table.Cell>
+      <Table.Row key={spec.name}>
+        <Table.Cell>{spec.name}</Table.Cell>
+        <Table.Cell>{spec.value}</Table.Cell>
       </Table.Row>
     );
   });
-  return details;
+  return specRows;
 }
 
 const LoadingScreen = () => (
@@ -39,7 +38,7 @@ const CarEditorDetails = ({carDetails}) => {
         <Table.HeaderCell colSpan='2'>Vehicle Specifications</Table.HeaderCell>
       </Table.Header>
       <Table.Body>
-        {getSpecsAsTable(response)}
+        {getSpecsAsRows(response)}
       </Table.Body>
     </Table>
   )
