@@ -23,11 +23,22 @@ const carDetailsReducer = createReducer(
     }
 });
 
+const searchCarsReducer = createReducer(
+  { searchText: undefined },
+  {
+    [keys.SEARCH_CARS]: (state, action) => {
+      return {
+        searchText: action.searchText
+      };
+    }
+  }
+);
+
 const carsReducer = createReducer(
   [...carShowData.cars],
   {
     [keys.ADD_CAR] : (state, action) => {
-      // TODO: Trigger modal
+      // LATER: Trigger modal
       return [
         // e.g. array of cars
         ...state,
@@ -35,10 +46,9 @@ const carsReducer = createReducer(
         { id: action.carId }
       ];
     },
-    [keys.REMOVE_CAR] : (state, action) => {
-      return state.map(car => {
-        if (car.id != action.carId)
-          return car;
+    [keys.REMOVE_CAR]: (state, action) => {
+      return state.filter(car => {
+        return car.id !== action.carId
       });
     },
     [keys.UPDATE_CAR] : (state, action) => {
@@ -53,5 +63,6 @@ const carsReducer = createReducer(
 export default combineReducers({
   carEditorModal: carEditorModalReducer,
   cars: carsReducer,
-  carDetails: carDetailsReducer
+  carDetails: carDetailsReducer,
+  carSearch: searchCarsReducer
 });

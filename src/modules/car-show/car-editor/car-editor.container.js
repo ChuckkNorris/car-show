@@ -36,7 +36,7 @@ const getSelectedCar = (props) => {
   const selectedCarId = _.get(props, 'carEditorModal.selectedCarId');
   if (!selectedCarId)
     return undefined;
-  return _.find(props.cars, (car) => car.id == selectedCarId);
+  return _.find(props.cars, (car) => _.get(car, 'id') == selectedCarId);
 }
 
 const shoudGetModelTrims = (prevCar, nextCar) => {
@@ -83,19 +83,23 @@ class CarEditorModal extends React.Component {
   render() {
     const {carEditorModal, toggleCarEditorModal, carDetails, updateCar, cars} = this.props;
     const car = getSelectedCar(this.props); // carEditorModal.selectedCar;
-    if (!car)
+    if (!car || !car.id)
       return null;
     
     return (
-      <Modal  onClose={() => toggleCarEditorModal()} open={carEditorModal.isOpen} basic size='small'>
+      <Modal onClose={() => toggleCarEditorModal()} open={carEditorModal.isOpen} basic size='small'>
         <div style={styles.getHeaderImageStyle(car.imageUrl)}>
-          <Button style={styles.closeButton} onClick={() => toggleCarEditorModal()} basic color='red' inverted>
-            <Icon name='remove' /> Close
-          </Button>
+         
+        
           <Header style={styles.headerText} icon='car' content={`${car.year} ${car.make} ${car.model}`} />
         </div>
         <Modal.Content>
           <Grid>
+            <Grid.Row>
+              <Button onClick={() => this.props.removeCar(car.id)} basic color='red' inverted>
+                <Icon name='remove' /> Remove Car
+              </Button>
+            </Grid.Row>
             <Grid.Row>
               <CarSelector car={car} updateCar={updateCar} />
             </Grid.Row>
@@ -113,7 +117,7 @@ class CarEditorModal extends React.Component {
 export default connect(
   // Mapping state to props
   (state) => ({
-    cars:state.carShow.cars,
+    cars: state.carShow.cars,
     carEditorModal: state.carShow.carEditorModal,
     carDetails: state.carShow.carDetails
   }),

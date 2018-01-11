@@ -24,7 +24,7 @@ const LoadingScreen = () => (
 </Segment>
 );
 
-// TODO #3: Create removeCar() action
+// TODO #2: Create removeCar() action
 const CarEditorDetails = ({carDetails}) => {
   if (carDetails.isLoading)
     return <LoadingScreen />;

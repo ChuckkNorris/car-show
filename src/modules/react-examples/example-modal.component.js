@@ -50,6 +50,14 @@ class ExampleStatefulModal extends React.Component {
   render() {
     return (
       <div>
+        {[1,2,3].map(val => {
+          return (
+            <Button
+              onClick={() => this.setState({...this.state, isOpen: true})}>
+              Open Modal {val}
+            </Button>
+          );
+        })}
         <Button
           onClick={() => this.setState({...this.state, isOpen: true})}>
           Open Modal
@@ -64,4 +72,4 @@ class ExampleStatefulModal extends React.Component {
   }
 }
 
-export default ExampleModal;
+export default ExampleStatefulModal;

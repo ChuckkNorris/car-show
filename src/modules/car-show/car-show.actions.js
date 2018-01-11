@@ -3,8 +3,9 @@ import uuid from 'uuid';
 
 export const keys = {
   ADD_CAR: 'ADD_CAR',
-  REMOVE_CAR: 'REMOVE_CAR',
   UPDATE_CAR: 'UPDATE_CAR',
+  REMOVE_CAR: 'REMOVE_CAR', 
+  SEARCH_CARS: 'SEARCH_CARS',
   // Three actions for an HTTP call
   GET_MODEL_TRIMS_START: 'GET_MODEL_TRIMS_START',
   GET_MODEL_TRIMS_SUCCESS: 'GET_MODEL_TRIMS_SUCCESS',
@@ -57,12 +58,19 @@ export const removeCar = (carId) => {
   return {
     type: keys.REMOVE_CAR,
     carId
-  };
+  }
 }
 
 export const updateCar = (car) => {
   return {
     type: keys.UPDATE_CAR,
     car
+  };
+}
+
+export const searchCars = (searchText) => {
+  return {
+    type: keys.SEARCH_CARS,
+    searchText
   };
 }

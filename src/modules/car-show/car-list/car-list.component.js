@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card, Grid} from 'semantic-ui-react';
+import _ from 'lodash';
 // import {Col, Row, Grid} from 'react-bootstrap';
 
 import CarCard from '../car-card/car-card.component';
@@ -25,7 +26,7 @@ const CarList = ({cars, onCarSelected}) => {
         {cars ? cars.map(car =>
           <Grid.Column
             mobile={8} tablet={4} computer={3}
-            key={car.id}
+            key={_.get(car, 'id')}
             style={styles.carColumn}
             onClick={() => onCarSelected(car)}>
             <CarCard car={car} />
