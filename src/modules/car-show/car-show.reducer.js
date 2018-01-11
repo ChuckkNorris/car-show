@@ -21,7 +21,18 @@ const carDetailsReducer = createReducer(
         response: action.response
       }
     }
-})
+});
+
+const carSearchReducer = createReducer(
+  { searchText: null },
+  {
+    [keys.SEARCH_CARS]: (state, action) => {
+      return {
+        searchText: action.searchText
+      };
+    }
+  }
+)
 
 const carsReducer = createReducer(
   [...carShowData.cars],
@@ -46,12 +57,13 @@ const carsReducer = createReducer(
       return state.map(car => {
         return car.id == updatedCar.id ? {...car, ...updatedCar} : car;
       });
-    },
+    }
   }
 );
 
 export default combineReducers({
   carEditorModal: carEditorModalReducer,
   cars: carsReducer,
-  carDetails: carDetailsReducer
+  carDetails: carDetailsReducer,
+  carSearch: carSearchReducer
 });

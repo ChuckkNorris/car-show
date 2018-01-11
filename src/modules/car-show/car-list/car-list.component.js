@@ -7,7 +7,8 @@ import GridColumn from 'semantic-ui-react/dist/commonjs/collections/Grid/GridCol
 
 const styles = {
   carColumn: {
-    paddingTop: 20
+    paddingTop: 20,
+    minWidth: 250
   },
   carCard: {
     width: '100%'
