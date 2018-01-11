@@ -38,18 +38,15 @@ class CarShow extends React.Component {
   }
 
   render() {
-    const {carEditorModal, carDetails = {}, addCar, searchCars} = this.props;
+    const {carEditorModal, carDetails = {}, addCar} = this.props;
     return (
       <div style={styles.container}>
         <CarEditor />
         <Header size='large' style={{textAlign: 'center'}}>Welcome to the Ride Show, Credera!</Header>
         <Grid>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column style={{textAlign: 'center'}}>
               <Button onClick={() => addCar()}>Add Car</Button>
-            </Grid.Column>
-            <Grid.Column>
-              <Input placeholder='search by year, make, model' onChange={(e) => searchCars(e.currentTarget.value)} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -64,22 +61,6 @@ class CarShow extends React.Component {
 
 }
 
-const includesText = (originalString, searchText) => {
-  const safeOrigString = originalString || '';
-  return safeOrigString.toString().toLowerCase().includes(searchText);
-}
-
-const filterCars = (state) => {
-  console.log('Filtering cars');
-  const allCars = _.get(state, 'carShow.cars', []);
-  const searchText = _.get(state, 'carShow.carSearch.searchText', '');
-  const toReturn = searchText ? allCars.filter(car =>
-    includesText(car.year, searchText)
-    || includesText(car.make, searchText)
-    || includesText(car.model, searchText)) : allCars;
-  return toReturn;
-}
-
 // Redux Middleware
 // Connects our component to the redux store
 export default connect(
@@ -90,7 +71,7 @@ export default connect(
     cars: state.carShow.cars,
     carEditorModal: state.carShow.carEditorModal,
     carDetails: _.get(state, 'carShow.carDetails'),
-    filteredCars: filterCars(state)
+    filteredCars: state.carShow.cars
   }),
   // Map actions your component needs to trigger
   // This will wrap a dispatch around your action creators

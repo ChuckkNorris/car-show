@@ -23,17 +23,6 @@ const carDetailsReducer = createReducer(
     }
 });
 
-const carSearchReducer = createReducer(
-  { searchText: null },
-  {
-    [keys.SEARCH_CARS]: (state, action) => {
-      return {
-        searchText: action.searchText
-      };
-    }
-  }
-)
-
 const carsReducer = createReducer(
   [...carShowData.cars],
   {
@@ -64,6 +53,5 @@ const carsReducer = createReducer(
 export default combineReducers({
   carEditorModal: carEditorModalReducer,
   cars: carsReducer,
-  carDetails: carDetailsReducer,
-  carSearch: carSearchReducer
+  carDetails: carDetailsReducer
 });

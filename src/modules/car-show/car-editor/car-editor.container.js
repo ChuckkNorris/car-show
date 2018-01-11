@@ -87,7 +87,7 @@ class CarEditorModal extends React.Component {
       return null;
     
     return (
-      <Modal open={carEditorModal.isOpen} basic size='small'>
+      <Modal  onClose={() => toggleCarEditorModal()} open={carEditorModal.isOpen} basic size='small'>
         <div style={styles.getHeaderImageStyle(car.imageUrl)}>
           <Button style={styles.closeButton} onClick={() => toggleCarEditorModal()} basic color='red' inverted>
             <Icon name='remove' /> Close

@@ -8,8 +8,7 @@ export const keys = {
   // Three actions for an HTTP call
   GET_MODEL_TRIMS_START: 'GET_MODEL_TRIMS_START',
   GET_MODEL_TRIMS_SUCCESS: 'GET_MODEL_TRIMS_SUCCESS',
-  GET_MODEL_TRIMS_ERROR: 'GET_MODEL_TRIMS_ERROR',
-  SEARCH_CARS: 'SEARCH_CARS'
+  GET_MODEL_TRIMS_ERROR: 'GET_MODEL_TRIMS_ERROR'
 };
 
 const getModelTrimsStart = (year, make, model) => {
@@ -66,11 +65,4 @@ export const updateCar = (car) => {
     type: keys.UPDATE_CAR,
     car
   };
-}
-
-export const searchCars = (searchText) => {
-  return {
-    type: keys.SEARCH_CARS,
-    searchText: searchText.toLowerCase()
-  }
 }
